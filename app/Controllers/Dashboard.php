@@ -28,10 +28,10 @@ class Dashboard extends BaseController
         $transactionByDateNow = $this->transactionModel->transactionByDateNow();
         $transactionCount = $this->transactionModel->countTransactionByDateNow();
         $transactionSubTotal = $this->transactionModel->sumSubTotalByDateNow();
+        $sumTransactionProduct = 0;
         foreach ($transactionByDateNow as $tbd) {
             $sumTransactionProduct = $this->transactionProductModel->sumQtyByInvoice($tbd['invoice']);
         }
-
 
         $dataProduct = [];
         foreach ($categories as $category) {

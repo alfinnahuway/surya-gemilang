@@ -36,9 +36,9 @@ $role = $session->get('role');
                 <a href="/suppliers">
                     <i class="fa fa-truck"></i>
                     <span>Suppliers</span>
-                    <span class="pull-right-container">
+                    <!-- <span class="pull-right-container">
                         <span class="label label-primary pull-right">4</span>
-                    </span>
+                    </span> -->
                 </a>
             </li>
             <li class="<?= ($path[0] === 'customers') ? 'active' : '' ?>">
@@ -79,7 +79,7 @@ $role = $session->get('role');
                         <li class="<?= (count($path) > 1) && ($path[1] === 'items') ? 'active' : ''  ?>"><a href="/products/items"><i class="fa fa-circle-o"></i> Items</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li class="treeview <?= ($path[0] === 'reports') ? 'active' : '' ?>">
                     <a href="#">
                         <i class="fa fa-pie-chart"></i>
                         <span>Reports</span>
@@ -88,9 +88,8 @@ $role = $session->get('role');
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                        <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                        <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+                        <li class="<?= (count($path) > 1) && ($path[1] === 'transaction') ? 'active' : ''  ?>"><a href="/reports/transaction"><i class="fa fa-circle-o"></i> Report Transaction</a></li>
+                        <li class="<?= (count($path) > 1) && ($path[1] === 'income') ? 'active' : ''  ?>"><a href="/reports/income"><i class="fa fa-circle-o"></i> Report Income</a></li>
                     </ul>
                 </li>
             <?php endif; ?>

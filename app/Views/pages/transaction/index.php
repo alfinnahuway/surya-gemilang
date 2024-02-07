@@ -43,7 +43,7 @@
                                 <div class="col-sm-9">
                                     <select class="form-control select2" id="customer" name="customer">
                                         <?php foreach ($customers as $customer) : ?>
-                                            <option value="<?= $customer['id']; ?>" <?= ($customer['id'] == 1) ? 'selected' : ''; ?>><?= $customer['full_name']; ?></option>
+                                            <option value="<?= $customer['id']; ?>" <?= ($customer['id'] == 1) ? 'selected' : '' ?>><?= $customer['full_name']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -78,7 +78,10 @@
                             <div class="form-group">
                                 <label for="inputPassword3" class="col-sm-3"></label>
                                 <div class="col-sm-9">
-                                    <button class="btn btn-primary btn-flat add-transaction">Add</button>
+                                    <button class="btn btn-primary btn-flat add-transaction">
+                                        <i style="margin-right: 2px;" class="fa fa-plus"></i>
+                                        Add Product
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +124,7 @@
                                         <th>Price</th>
                                         <th>Qty</th>
                                         <th>Total</th>
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -133,12 +136,11 @@
                                             <td><?= $i++; ?></td>
                                             <td><?= $add['items_barcode']; ?></td>
                                             <td><?= $add['product']; ?></td>
-                                            <td><?= $add['price']; ?></td>
+                                            <td><?= number_format($add['price'], 0, ',', '.'); ?></td>
                                             <td><?= $add['qty_product']; ?></td>
-                                            <td><?= $add['qty_product'] * $add['price']; ?></td>
+                                            <td><?= number_format($add['qty_product'] * $add['price'], 0, ',', '.'); ?></td>
                                             <td class="action">
                                                 <button type="button" class="btn btn-danger btn-flat btn-sm" data-delete="<?= $add['items_barcode']; ?>" id="deleteProduct"><i class="fa fa-trash"></i></button>
-                                                <a href="/transaction/edit/<?= $add['items_barcode']; ?>" data-toggle="modal" data-target="#modal-detail" class="btn btn-flat btn-warning btn-sm btn-detail"><i class="fa fa-edit"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -183,7 +185,7 @@
                             <div class="form-group">
                                 <label for="cash" class="col-sm-3">Cash</label>
                                 <div class="col-sm-9 pull-right">
-                                    <input type="text" class="form-control input-lg text-right" id="cash" name="cash">
+                                    <input type="text" class="form-control input-lg text-right" id="cash" name="cash" autofocus>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -216,14 +218,18 @@
                     <!-- create margin bottom btn -->
                     <div class="row">
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-warning btn-flat btn-sm btn-block">Clear</button>
+
+                            <button type="button" class="btn btn-warning btn-flat btn-sm btn-block">
+                                <i style="margin-right: 2px;" class="glyphicon glyphicon-repeat"></i>
+                                Clear
+                            </button>
                         </div>
                         <br>
                         <br>
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-success btn-flat btn-block">
+                            <button type="submit" class="btn btn-success btn-flat">
                                 <i class="fa fa-location-arrow"></i>
-                                <span>Process Payment</span>
+                                <span>Proccess Payment</span>
                             </button>
 
                         </div>
@@ -246,7 +252,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Default Modal</h4>
+                <h4 class="modal-title">Product</h4>
             </div>
             <div class="modal-body">
                 <table id="example1" class="table table-bordered table-striped">

@@ -85,6 +85,7 @@ class Customers extends BaseController
         return view('pages/customers/edit', $data);
     }
 
+
     public function delete($id)
     {
         $this->customersModel->delete($id);

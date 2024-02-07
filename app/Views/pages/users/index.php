@@ -7,8 +7,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Dashboard
-            <small>Control panel</small>
+            <?= $title; ?>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -24,8 +23,10 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Monthly Recap Report</h3>
-                        <a href="/users/add" class="btn btn-primary btn-flat pull-right">Add <?= $title; ?></a>
+                        <h3 class="box-title"><?= $secondTitle; ?></h3>
+                        <a href="/users/add" class="btn btn-primary btn-flat pull-right">
+                            <i style="margin-right: 2px;" class="fa fa-plus"></i>
+                            Add <?= $title; ?></a>
                         <!-- create button position righ -->
                     </div>
                     <!-- /.box-header -->
@@ -41,6 +42,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Image</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Role</th>
@@ -52,6 +54,10 @@
                                         <?php foreach ($users as $user) : ?>
                                             <tr>
                                                 <td><?= $i++; ?></td>
+                                                <td>
+                                                    <!-- create image thumbnail -->
+                                                    <img src="/image/users/<?= $user['image']; ?>" alt="<?= $user['name']; ?>" class="img-thumbnail" width="50">
+                                                </td>
                                                 <td><?= $user['name']; ?></td>
                                                 <td><?= $user['email']; ?></td>
                                                 <td><?= $user['role']; ?></td>

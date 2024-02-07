@@ -46,6 +46,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="skin-blue sidebar-mini sidebar-collapse">
+<body class="skin-blue sidebar-mini sidebar-collapse skin-red">
 
   <div class="wrapper">

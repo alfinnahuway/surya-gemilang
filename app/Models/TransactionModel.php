@@ -49,6 +49,36 @@ class TransactionModel extends Model
         return $query->getResultArray();
     }
 
+    public function getTransactionByMonth($startDate = false, $endDate = false)
+    {
+        //   sum sub_total group by date
+        if ($startDate == false && $endDate == false) {
+            //   $query = $this->query("SELECT DATE(created_at) as date, SUM(sub_total) as sub_total FROM transaction GROUP BY DATE(created_at)");
+            $query = $this->query("SELECT DATE(created_at) as date, SUM(sub_total) as sub_total FROM transaction WHERE MONTH(created_at) = MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE()) GROUP BY DATE(created_at)");
+        } else {
+            $query = $this->query("SELECT DATE(created_at) as date, SUM(sub_total) as sub_total FROM transaction WHERE DATE(created_at) BETWEEN '$startDate' AND '$endDate' GROUP BY DATE(created_at)");
+        }
+        return $query->getResultArray();
+    }
+
+    public function getTransactionByDate($date = null, $customer = null)
+    {
+        $query = $this->db->table('transaction')
+            ->select('transaction.*, customers.full_name, users.name')
+            ->join('customers', 'customers.id = transaction.customer_id')
+            ->join('users', 'users.id = transaction.user_id');
+        if ($date == null) {
+            $query->where('DATE(transaction.created_at)', date('Y-m-d'));
+        } else {
+            $query->where('DATE(transaction.created_at)', $date);
+        }
+        if ($customer != null) {
+            $query->where('transaction.customer_id', $customer);
+        }
+        return $query->get()->getResultArray();
+    }
+
+
     public function sumSubTotalByDateNow()
     {
         $query = $this->query("SELECT SUM(sub_total) as sub_total FROM transaction WHERE DATE(created_at) = CURDATE()");

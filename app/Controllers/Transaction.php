@@ -114,7 +114,8 @@ class Transaction extends BaseController
         $note = $this->request->getVar('note');
         $transactionCustomer = $this->customersModel->where('id', $customer)->first();
 
-
+        $cash = str_replace('.', '', $cash);
+        $transactionTotal = str_replace('.', '', $transactionTotal);
         if (!$transactionProduct) {
             $this->sessions->setFlashdata('error', 'Transaction is empty');
             return redirect()->to('/transaction')->withInput();
@@ -162,8 +163,9 @@ class Transaction extends BaseController
         }
 
         $this->transactionModel->save($data);
-        $this->sessions->setFlashdata('success', 'Transaction successfully proccessed');
-        return redirect()->to('/transaction')->withInput();
+        // get data invoice last transaction
+        $transaction = $this->transactionModel->getTransaction($invoice);
+        return redirect()->to('/transaction/printout/' . $transaction['invoice'])->withInput();
     }
 
 

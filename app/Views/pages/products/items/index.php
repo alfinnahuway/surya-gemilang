@@ -105,8 +105,6 @@
                 <h4 class="modal-title">Default Modal</h4>
             </div>
             <div class="modal-body">
-
-
                 <table>
                     <tr>
                         <td colspan="2" rowspan="9" class="data-table">

@@ -27,18 +27,18 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form action="/users/add" method="post" enctype="multipart/form-data">
+                                <form action="/users/edit/<?= $users['id']; ?>" method="post" enctype="multipart/form-data">
                                     <?= csrf_field(); ?>
                                     <div class="box-body">
                                         <!-- text input -->
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <img src="../../../image/users/default.png" class="img-thumbnail img-preview" alt="" id="userImage">
+                                                <img src="../../../image/users/<?= $users['image']; ?>" class="img-thumbnail img-preview" alt="" id="userEditImage">
                                             </div>
                                             <div class="col-md-7">
                                                 <div class="form-group <?= ($validation->hasError('name')) ? 'has-error' : 'has-feedback' ?>">
                                                     <label>Name *</label>
-                                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter ..." value="<?= set_value('name') ?>">
+                                                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter ..." value="<?= (set_value('name')) ? set_value('name') : $users['name'] ?>">
                                                     <span class="help-block">
                                                         <?= $validation->getError('name'); ?>
                                                     </span>
@@ -46,16 +46,16 @@
 
                                                 <div class="form-group <?= ($validation->hasError('email')) ? 'has-error' : 'has-feedback' ?>">
                                                     <label>Email *</label>
-                                                    <input type="text" id="email" name="email" class="form-control" placeholder="Enter ..." value="<?= set_value('email'); ?>">
+                                                    <input type="text" id="email" name="email" class="form-control" placeholder="Enter ..." value="<?= (set_value('email')) ? set_value('email') : $users['email'] ?>">
                                                     <span class="help-block">
                                                         <?= $validation->getError('email'); ?>
                                                     </span>
                                                 </div>
-                                                <div class="form-group <?= ($validation->hasError('image')) ? 'has-error' : 'has-feedback' ?>">
-
-                                                    <input type="file" id="image" name="image">
+                                                <div class="form-group <?= ($validation->hasError('editImage')) ? 'has-error' : 'has-feedback' ?>">
+                                                    <input type="file" id="editImage" name="editImage">
+                                                    <input type="hidden" value="<?= $users['image']; ?>" name="oldImage" id="oldImage">
                                                     <span class="help-block">
-                                                        <?= $validation->getError('image'); ?>
+                                                        <?= $validation->getError('editImage'); ?>
                                                     </span>
 
                                                 </div>
@@ -65,24 +65,22 @@
 
                                         <div class="form-group <?= ($validation->hasError('username')) ? 'has-error' : 'has-feedback' ?>">
                                             <label>Username *</label>
-                                            <input type="text" id="username" name="username" class="form-control" placeholder="Enter ..." value="<?= set_value('username'); ?>">
+                                            <input type="text" id="username" name="username" class="form-control" placeholder="Enter ..." value="<?= (set_value('username')) ? set_value('username') : $users['username'] ?>">
                                             <span class="help-block">
                                                 <?= $validation->getError('username'); ?>
                                             </span>
                                         </div>
+                                        <div class="form-group <?= ($validation->hasError('oldpassword')) ? 'has-error' : 'has-feedback' ?>">
+                                            <label>Old Password</label>
+                                            <input type="password" id="oldpassword" name="oldpassword" class="form-control" placeholder="Enter ..." value="<?= set_value('oldpassword'); ?>">
+                                        </div>
                                         <div class="form-group <?= ($validation->hasError('password')) ? 'has-error' : 'has-feedback' ?>">
                                             <label>Password</label>
                                             <input type="password" id="password" name="password" class="form-control" placeholder="Enter ..." value="<?= set_value('password'); ?>">
-                                            <span class="help-block">
-                                                <?= $validation->getError('password'); ?>
-                                            </span>
                                         </div>
                                         <div class="form-group <?= ($validation->hasError('password_confirm')) ? 'has-error' : 'has-feedback' ?>">
                                             <label>Password Confirm</label>
                                             <input type="password" id="password_confirm" name="password_confirm" class="form-control" placeholder="Enter ..." value="<?= set_value('password_confirm'); ?>">
-                                            <span class="help-block">
-                                                <?= $validation->getError('password_confirm'); ?>
-                                            </span>
                                         </div>
                                     </div>
                                     <div class="box-footer">

@@ -37,7 +37,8 @@
 <!-- FastClick -->
 <script src="../../../assets/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../assets/dist/js/adminlte.min.js"></script>
+<script src="../../../assets/dist/js/adminlte.js"></script>
+<!-- <script src="../../../assets/dist/js/adminlte.min.js"></script> -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../../../assets/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->

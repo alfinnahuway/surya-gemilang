@@ -33,12 +33,15 @@ class TransactionProductModel extends Model
     }
 
 
-    public function sumQtyByInvoice($invoice)
+    public function sumQtyByInvoice($invoice = null)
     {
         $query = $this->query("SELECT SUM(qty_product) as qty FROM transaction_product WHERE transaction_invoice = '$invoice'");
         $result = $query->getRowArray();
-        $qtyProduct = $result['qty'];
-        return $qtyProduct;
+        $qty = $result['qty'];
+        if ($qty == null) {
+            return 0;
+        }
+        return $qty;
     }
 
 
@@ -55,5 +58,13 @@ class TransactionProductModel extends Model
     public function deleteData($itemsBarcode)
     {
         $this->db->table($this->table)->delete(['items_barcode' => $itemsBarcode]);
+    }
+
+    public function getTransactionProductByInvoice($invoice)
+    {
+        return $this->join('items', 'items.barcode = transaction_product.items_barcode')
+            ->select('transaction_product.*, items.product, items.price')
+            ->where('transaction_invoice', $invoice)
+            ->findAll();
     }
 }
